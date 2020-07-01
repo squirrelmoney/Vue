@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="./assets/dashboard.js"></script>
+    <link href="./assets/dashboard.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="table-responsive " id="app">
+        <table class="table table-striped table-sm container" style="width: 50%;">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>书籍名称</td>
+                <td>出版日期</td>
+                <td>价格</td>
+                <td>购买数量</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tr v-for="(book, index) in books" :key="index" v-bind:id="index">
+                <td>{{index+1}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.data}}</td>
+                <td>￥{{book.price}}</td>
+                <td><input type="number" v-model="nums[index]"></td>
+                <td><button  @click="remove(index)">移除</button></td>
+                
+            </tr>
+            <td>总价：{{totalprice}}</td>
+    </table>
+    </div>
+    <script>
+        let mv=new Vue({
+            el:"#app",
+            data:{
+               books:
+                [
+                    {data:'2020-09-21',price:39.3,name:'西游记'},
+                    {data:'2020-03-21',price:49.3,name:'水浒传'},
+                    {data:'2020-02-24',price:19.3,name:'红楼梦'},
+                    {data:'2020-01-23',price:89.3,name:'三国演义'}
+                ],
+                nums:[1,1,1,1],
+            },
+            methods: {
+                remove(index){
+                   this.books.splice(index,1);
+                }
+            },
+            computed: {
+                totalprice(){
+                    let price=0;
+                    for(i=0;i<this.books.length;i++){
+                        price+=this.books[i].price*this.nums[i];
+                    }
+                    // return this.books[0].price*this.nums[0]+
+                    // this.books[1].price*this.nums[1]+
+                    // this.books[2].price*this.nums[2]+
+                    // this.books[3].price*this.nums[3];
+                    return price;
+                }
+            },
+        
+        })
+    </script>
+</body>
+</html>
