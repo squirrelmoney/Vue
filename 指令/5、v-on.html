@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 事件中直接写js片段 -->
+        <button @click="num++">赞</button>
+        <!-- 事件指定一个回调函数，必须是vue实例中定义的函数 -->
+        <button @click="cancle">取消</button>
+        <!--  -->
+        <h2>有{{num}}个赞</h2>
+
+        <!-- 事件修饰符 -->
+        <!-- 仅会触发一次点击事件 -->
+        <!-- `.once`   点击事件将只会触发一次:再次点击不会再触发效果 -->
+        <div style="border: 1px solid red;padding: 20px;" @click.once="hello">
+            大div
+            <!-- 仅会触发小div的click事件，不会传播至大div的click事件 -->
+            <!-- `.stop`阻止单击事件继续传播 -->
+            <div style="border: 1px solid blue;padding: 20px;"  @click.stop="hello">
+                小div <br />
+                <!-- `.prevent`  标签本身效果不会执行:不会触发超链接 -->
+                <a href="http://www.baidu.com"  @click.prevent.stop="hello">去百度</a>
+            </div>
+        </div>
+
+        <!-- 按键修饰符 -->
+        <input v-model="num" type="text" v-on:keyup.up="num+=1" @keyup.down="num-=1" @click.ctrl="num=10"/>
+    </div>
+    <script>
+     let vm= new Vue({
+         el: "#app",
+         data:{
+             num:0
+         },
+         methods: {
+             cancle(){
+                 this.num--;
+             },
+             hello(){
+                 alert("被点击了");
+             }
+         },
+     })
+    </script>
+</body>
+</html>

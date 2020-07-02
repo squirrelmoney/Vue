@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+    `v-text`：显示文本原始内容，不对html元素进行解析
+    `v-html`：显示html解析后的内容 
+    -->
+    <div id="app">
+        <span v-html="msg"></span><!--不进行转义： Hello(h1的大小) -->
+        <br/>
+        <span v-text="msg"></span><!--进行转义 <h1>Hello</h1> -->
+    </div>
+ <script>
+     new Vue({
+         el:"#app",
+         data:{
+             msg:"<h1>hello</h1>"
+         }
+     })
+
+ </script>   
+</body>
+</html>

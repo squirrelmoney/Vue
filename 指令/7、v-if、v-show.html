@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!--
+         v-if:顾名思义，条件判断，当结果为true时，所在元素才会被渲染 
+         v-show:当得到结果为true时，所在元素才会显示
+    -->
+    <div id="app">
+        <button v-on:click="show = !show">点我呀</button>
+     	<!-- 当show为true时才会显示标签 -->
+        <!-- 1、使用v-if显示 -->
+        <h1 v-if="show">if=看到我....</h1>
+        <!-- 2、使用v-show显示  不为true时，元素被隐藏-->
+        <h1 v-show="show">show=看到我</h1>
+    </div>
+
+    <script src="../node_modules/vue/dist/vue.js"></script>
+        
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                show: true
+            }
+        })
+    </script>
+
+</body>
+</html>

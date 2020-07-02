@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 某些结果是基于当前数据实时计算出来，我们可以利用计算属性来完成 -->
+        <ul>
+            <li>西游记;价格:{{xyjprice}},数量：<input type="number" v-model="xyjnum"></li>
+            <li>水浒传;价格:{{shzprice}},数量：<input type="number" v-model="shznum"></li>
+            <li>总价：{{totalprice}}</li>
+            {{msg}}
+        </ul>
+
+    </div>
+    <script>
+        //Watch可以让我们监控一个值的变化，从而做出相应的反应
+        let vm= new Vue({
+            el:"#app",
+            data:{
+                xyjprice:99.8,
+                shzprice:88.99,    
+                xyjnum:1,
+                shznum:1,
+                msg:"", 
+            },
+            computed: {
+                totalprice(){
+                    return this.xyjprice*this.xyjnum+this.shzprice*this.shznum;
+                }
+            },
+            watch: {
+                xyjnum:function(newval,oldval){
+                  //  alert("newVal"+newval+"==>oldValue"+oldval)
+                    if(newval>=3){
+                        this.msg="库存不足"
+                        this.xyjnum=3
+                    }else{
+                        this.msg=""
+                    }
+                },
+                shznum(newVal,oldVal){
+                    if(newVal>=4){
+                        this.msg="水浒传库存超出限制";
+                        this.shznum=3
+                    }else{
+                        this.msg=""
+                    }
+                },
+            },
+        })
+    </script>
+</body>
+</html>
